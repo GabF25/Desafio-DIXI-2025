@@ -1,3 +1,11 @@
+:root{
+  --azul-padrao: #3379BC;
+  --azul-hover: #3d88b1;
+  --branco: #ffffff;
+}
+
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

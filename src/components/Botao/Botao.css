@@ -1,0 +1,28 @@
+.btn {
+    background-color: var(--azul-padrao);
+    color: var(--branco);
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    padding: .3rem 3rem;
+    font-size: 15px;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease-in-out;
+    width: 8rem;
+    display: flex;
+}
+
+.btn:hover {
+    background-color: var(--azul-hover);
+}
+
+.btn-icon {
+    font-size: 25px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    position: relative;
+    margin-right: 8px;
+}
