@@ -1,12 +1,16 @@
 import Menu from "../Menu/Menu";
+import './Tela.css'; 
 
-const Tela = ({ children }) => {
+const Tela = ({ 
+    children 
+}) => {
     return ( 
         <div className="tela">
-        
-            <main>
+           <Menu/>
+            <div className="conteudo">
                 {children}
-            </main>
+            </div>
+
         </div>
     );
 }

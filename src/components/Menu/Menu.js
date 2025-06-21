@@ -2,10 +2,10 @@ import './Menu.css';
 import { IoPersonSharp } from "react-icons/io5";
 import { MdDescription } from "react-icons/md";
 import { MdOutlineSystemUpdateAlt } from "react-icons/md";
-import{Link} from 'react-router-dom'; // Importando Link
-
+import{Link, useNavigate} from 'react-router-dom';
 
 const Menu = () => {
+
     return ( 
         <div className="menu"> 
 
@@ -15,16 +15,20 @@ const Menu = () => {
                     nome="Funcionários" 
                     rota="/funcionarios"
                 />
+              
+                
                 <ItemMenu
                     icone ={<MdDescription/>}
                     nome="Espelho Ponto" 
-                    rota="espelho-ponto"  
+                    rota="/espelho-ponto"  
                 />
+
                 <ItemMenu
                     icone ={<MdOutlineSystemUpdateAlt />}
                     nome="Importação AFD"
-                    rota="importacao-afd"
+                    rota="/importacao-afd"
                 />
+
            </div>
 
         </div>
@@ -36,11 +40,18 @@ const ItemMenu = ({
     icone,
     rota,
 }) => {
+    const navigate = useNavigate(); // Importar Navigate 
+
     return (
-        <Link to={rota} className="menu-item">
+        <div className='menu-wrapper'>
+            <div 
+            className="menu-item"
+            onClick={() => navigate(rota)}
+        >
             <span className="menu-item-icone">{icone}</span>
             <span className="menu-item-nome">{nome}</span>
-        </Link>
+        </div>
+        </div>
     );
 }
 
