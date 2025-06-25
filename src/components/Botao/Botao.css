@@ -26,3 +26,15 @@
     position: relative;
     margin-right: 8px;
 }
+
+.secundario {
+    background-color: white;
+    color: var(--azul-padrao);
+    border: 1.5px solid var(--azul-padrao);
+    white-space: nowrap;
+}
+
+.secundario:hover {
+    background-color: var(--azul-padrao);
+    color: white;
+}

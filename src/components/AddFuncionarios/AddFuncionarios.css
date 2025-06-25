@@ -1,0 +1,46 @@
+.formulario-funcionario {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;   
+  gap: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  width: 50vh;            
+  max-width: 800px;       
+  box-sizing: border-box;
+  border: 1px solid red;
+  justify-content: center;
+  align-items: center;   
+  margin: 0 auto;         
+}
+
+
+.campoGrupo {
+  display: flex;
+  flex-direction: column; /* empilha h3 em cima do Campo */
+  width: 200px; /* ou ajuste a largura que quiser */
+}
+
+.campoOu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.botoesCadastro {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+h4 {
+    font-size: 15px;
+    color: rgb(185, 185, 185, 1);
+    font-weight: 500;
+}

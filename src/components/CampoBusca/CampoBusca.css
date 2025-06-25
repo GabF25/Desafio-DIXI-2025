@@ -1,0 +1,12 @@
+.campo-busca {
+    background-color: beige;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 10px;
+}
+
+.opcoes-busca {
+  display: flex;
+  flex-direction: column;
+}

@@ -8,6 +8,8 @@ import Funcionarios from './components/Funcionarios/Funcionarios.js';
 import EspelhoPonto from './components/EspelhoPonto/EspelhoPonto.js';
 import ImportacaoAFD from './components/ImportacaoAFD/ImportacaoAFD.js';
 import Tela from './components/Tela/Tela.js';
+import AddFuncionarios from './components/AddFuncionarios/AddFuncionarios.js';
+
 
 function App() {
 
@@ -49,6 +51,15 @@ function App() {
               <ImportacaoAFD/>
             </Tela>
           } 
+        />
+
+        <Route
+          path="/add-funcionarios" 
+          element={
+            <Tela>
+              <AddFuncionarios/>
+            </Tela>
+          }
         />
 
         <Route 
