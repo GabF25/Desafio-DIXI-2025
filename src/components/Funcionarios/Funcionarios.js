@@ -12,10 +12,7 @@ function Funcionarios() {
 
   const [listaFuncionarios, setListaFuncionarios] = useState([]);
 
-  useEffect(() => {
-    const dadosSalvos = JSON.parse(localStorage.getItem('funcionarios')) || [];
-    setListaFuncionarios(dadosSalvos);
-  }, []);
+  
 
   return (
     <>
@@ -24,14 +21,14 @@ function Funcionarios() {
       <CampoBusca>
         <div className="opcoes-busca">
           <h3>Nome do Funcionário</h3>
-          <Campo 
-          placeholder="Nome"/>
+          <Campo
+            placeholder="Nome" />
         </div>
 
         <div className="opcoes-busca">
           <h3>CPF</h3>
-          <Campo 
-            tamanhoMaximo={11} 
+          <Campo
+            tamanhoMaximo={11}
             placeholder="000.000.000-00"
           />
         </div>
@@ -39,7 +36,7 @@ function Funcionarios() {
         <div className="opcoes-busca">
           <h3>PIS</h3>
           <Campo tamanhoMaximo={11}
-          placeholder="000.00000.00-0"
+            placeholder="000.00000.00-0"
           />
         </div>
 
@@ -57,7 +54,7 @@ function Funcionarios() {
       <Botao
         tipo="primario"
         icone={<IoMdSearch />}
-        aoClicar={() => {}}
+        aoClicar={() => { }}
       >
         Pesquisar
       </Botao>
@@ -71,17 +68,6 @@ function Funcionarios() {
       </Botao>
 
       <div className="lista-funcionarios">
-        {listaFuncionarios.length === 0 ? (
-          <p>Nenhum funcionário cadastrado.</p>
-        ) : (
-          <ul>
-            {listaFuncionarios.map((f, i) => (
-              <li key={i}>
-                <strong>{f.nome}</strong> CPF: {f.cpf}, PIS: {f.pis}, Matrícula: {f.matricula}, Admissão: {f.dataAdmissao}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
     </>
   );

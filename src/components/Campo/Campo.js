@@ -1,12 +1,14 @@
 import React from 'react';
 import './Campo.css';
 
+
+
 const Campo = ({
     onChange,
     tamanhoMaximo,
     type = "text",
     value,
-    placeholder
+    placeholder,
 }) => {
     return ( 
         <input className="campo"
