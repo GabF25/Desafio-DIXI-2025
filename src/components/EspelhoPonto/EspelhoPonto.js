@@ -5,7 +5,7 @@ const EspelhoPonto = () => {
   return (
     <div>
       <h1>Espelho de Ponto</h1>
-      <Campo placeholder="Sabão Espelho de Ponto" />
+      <Campo placeholder="Espelho de Ponto" />
       <Campo placeholder="Data Inicial" type="date" />
     </div>
   );

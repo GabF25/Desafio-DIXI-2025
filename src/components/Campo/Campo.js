@@ -9,9 +9,11 @@ const Campo = ({
     type = "text",
     value,
     placeholder,
-}) => {
+    className,
+}) => { 
     return ( 
-        <input className="campo"
+        <input
+            className={`campo ${className || ''}`}
             type={type}
             placeholder={placeholder}
             maxLength={tamanhoMaximo}
@@ -20,5 +22,5 @@ const Campo = ({
         />
      );
 }
- 
+
 export default Campo;
