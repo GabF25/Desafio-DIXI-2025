@@ -34,9 +34,7 @@ const AddFuncionarios = () => {
     }
 
     function cadastrar() {
-        if (camposVazios()) {
-            return; // Interrompe se algum campo obrigatório estiver vazio
-        }
+        if (validarCamposVazios()) return;
 
         if (!validarCpf(funcionario.cpf)) {
             setErros(prev => ({ ...prev, cpf: 'CPF inválido' }));
@@ -53,13 +51,11 @@ const AddFuncionarios = () => {
             return;
         }
 
-        if (funcionarioCadastrado(funcionario)) {
-            return;
-        } else {
-            setErros({ nome: '', cpf: '', pis: '', matricula: '', data: '' });
-            salvarFuncionario();
-            setFuncionario({ nome: "", cpf: "", pis: "", matricula: "", data: "" });
-        }
+        if (verificarJaCadastrado(funcionario)) return;
+        
+        setErros({ nome: '', cpf: '', pis: '', matricula: '', data: '' });
+        salvarFuncionario();
+        navigate("/funcionarios")
     }
 
     function validarPis(pis) {
@@ -105,7 +101,7 @@ const AddFuncionarios = () => {
         return true;
     }
 
-    function funcionarioCadastrado(funcionario) {
+    function verificarJaCadastrado(funcionario) {
         const cpfNumeros = funcionario.cpf.replace(/\D/g, '');
         const pis = funcionario.pis;
         const matricula = funcionario.matricula;
@@ -117,7 +113,7 @@ const AddFuncionarios = () => {
         for (let f of funcionarios) {
             const fCpf = f.cpf.replace(/\D/g, '');
             if (fCpf === cpfNumeros) erroCpf = 'CPF já cadastrado';
-            if (f.pis === pis) erroPis = 'PIS já cadastrado';
+            if (pis && f.pis === pis) erroPis = 'PIS já cadastrado'
             if (f.matricula === matricula) erroMatricula = 'Matrícula já cadastrada';
         }
 
@@ -137,7 +133,7 @@ const AddFuncionarios = () => {
         return dataInput <= hoje;
     }
 
-    function camposVazios() {
+    function validarCamposVazios() {
         const novosErros = {};
         const cpfVazio = !funcionario.cpf.trim();
         const pisVazio = !funcionario.pis.trim();
@@ -163,18 +159,19 @@ const AddFuncionarios = () => {
             <h3>Adicionar Funcionários</h3>
             <div className="formulario-funcionario">
                 <div className='campoGrupo'>
-                    <h3>Nome do Funcionário</h3>
                     <Campo
                         placeholder={"Nome"}
                         value={funcionario.nome}
                         onChange={e => setFuncionario({ ...funcionario, nome: e.target.value })}
                         className={erros.nome ? 'campo-erro' : ''}
-                    />
+                    >
+                        Nome do Funcionário
+                    </Campo>
+
                     {erros.nome && <p style={{ color: 'red' }}>{erros.nome}</p>}
                 </div>
 
                 <div className='campoGrupo'>
-                    <h3>CPF</h3>
                     <Campo
                         placeholder={"000.000.000-00"}
                         tamanhoMaximo={14}
@@ -190,7 +187,9 @@ const AddFuncionarios = () => {
                             setFuncionario({ ...funcionario, cpf: formatado });
                         }}
                         className={erros.cpf ? 'campo-erro' : ''}
-                    />
+                    >
+                        CPF
+                    </Campo>
                     {erros.cpf && <p style={{ color: 'red' }}>{erros.cpf}</p>}
                 </div>
 
@@ -199,7 +198,7 @@ const AddFuncionarios = () => {
                 </div>
 
                 <div className='campoGrupo'>
-                    <h3>PIS</h3>
+                    <h3></h3>
                     <Campo
                         placeholder={"000.00000.00-0"}
                         tamanhoMaximo={14}
@@ -215,29 +214,33 @@ const AddFuncionarios = () => {
                             setFuncionario({ ...funcionario, pis: formatado });
                         }}
                         className={erros.pis ? 'campo-erro' : ''}
-                    />
+                    >
+                        PIS
+                    </Campo>
                     {erros.pis && <p style={{ color: 'red' }}>{erros.pis}</p>}
                 </div>
 
                 <div className='campoGrupo'>
-                    <h3>Matrícula</h3>
                     <Campo
                         value={funcionario.matricula}
                         tamanhoMaximo={8}
                         onChange={e => setFuncionario({ ...funcionario, matricula: e.target.value })}
                         className={erros.matricula ? 'campo-erro' : ''}
-                    />
+                    >
+                        Matrícula
+                    </Campo>
                     {erros.matricula && <p style={{ color: 'red' }}>{erros.matricula}</p>}
                 </div>
 
                 <div className='campoGrupo'>
-                    <h3>Data de Admissão</h3>
                     <Campo
                         type="date"
                         value={funcionario.data}
                         onChange={e => setFuncionario({ ...funcionario, data: e.target.value })}
                         className={erros.data ? 'campo-erro' : ''}
-                    />
+                    >
+                        Data de Admissão
+                    </Campo>
                     {erros.data && <p style={{ color: 'red' }}>{erros.data}</p>}
                 </div>
 

@@ -1,8 +1,6 @@
 import React from 'react';
 import './Campo.css';
 
-
-
 const Campo = ({
     onChange,
     tamanhoMaximo,
@@ -10,16 +8,22 @@ const Campo = ({
     value,
     placeholder,
     className,
+    children
 }) => { 
     return ( 
-        <input
-            className={`campo ${className || ''}`}
-            type={type}
-            placeholder={placeholder}
-            maxLength={tamanhoMaximo}
-            value={value}
-            onChange={onChange}
-        />
+        <>
+            <label className={"label-input"}>
+                {children}
+            </label>
+            <input
+                className={`campo ${className || ''}`}
+                type={type}
+                placeholder={placeholder}
+                maxLength={tamanhoMaximo}
+                value={value}
+                onChange={onChange}
+            />
+        </>
      );
 }
 

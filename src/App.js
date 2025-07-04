@@ -35,6 +35,15 @@ function App() {
           } 
         />
 
+         <Route
+          path="/add-funcionarios" 
+          element={
+            <Tela>
+              <AddFuncionarios/>
+            </Tela>
+          }
+        />
+
         <Route
           path = "/espelho-ponto" 
           element={
@@ -51,15 +60,6 @@ function App() {
               <ImportacaoAFD/>
             </Tela>
           } 
-        />
-
-        <Route
-          path="/add-funcionarios" 
-          element={
-            <Tela>
-              <AddFuncionarios/>
-            </Tela>
-          }
         />
 
         <Route 

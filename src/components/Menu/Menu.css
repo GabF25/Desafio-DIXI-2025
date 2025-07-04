@@ -1,6 +1,7 @@
 .menu {
     display: flex;
     width: 6rem;
+    min-width: 6rem;
     min-height: 100vh;
     overflow-x:  hidden;
     background-color: var(--azul-padrao);

@@ -7,48 +7,21 @@ import { IoIosAdd } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
 
+
 function Funcionarios() {
   const navigate = useNavigate();
-
   const [listaFuncionarios, setListaFuncionarios] = useState([]);
 
-  
+  useEffect(() => {
+    const funcionarios = JSON.parse(localStorage.getItem("funcionario")) || [];
+    setListaFuncionarios(funcionarios);
+  }, []);
 
   return (
     <>
       <h1>Funcionários</h1>
 
       <CampoBusca>
-        <div className="opcoes-busca">
-          <h3>Nome do Funcionário</h3>
-          <Campo
-            placeholder="Nome" />
-        </div>
-
-        <div className="opcoes-busca">
-          <h3>CPF</h3>
-          <Campo
-            tamanhoMaximo={11}
-            placeholder="000.000.000-00"
-          />
-        </div>
-
-        <div className="opcoes-busca">
-          <h3>PIS</h3>
-          <Campo tamanhoMaximo={11}
-            placeholder="000.00000.00-0"
-          />
-        </div>
-
-        <div className="opcoes-busca">
-          <h3>Matrícula</h3>
-          <Campo tamanhoMaximo={8} placeholder="Matrícula" />
-        </div>
-
-        <div className="opcoes-busca">
-          <h3>Data de Admissão</h3>
-          <Campo type="date">00/00/0000</Campo>
-        </div>
       </CampoBusca>
 
       <Botao
@@ -67,7 +40,31 @@ function Funcionarios() {
         Adicionar
       </Botao>
 
-      <div className="lista-funcionarios">
+      <div className="lista-funcionarios" style={{ marginTop: 20 }}>
+        {listaFuncionarios.length === 0 ? (
+          <div>Nenhum funcionário encontrado.</div>
+        ) : (
+          <table border="1" cellPadding="6" style={{ borderCollapse: 'collapse', width: '100%' }}>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>PIS</th>
+                <th>Matrícula</th>
+              </tr>
+            </thead>
+            <tbody>
+              {listaFuncionarios.map((f, i) => (
+                <tr key={i}>
+                  <td>{f.nome || '-'}</td>
+                  <td>{f.cpf || '-'}</td>
+                  <td>{f.pis || '-'}</td>
+                  <td>{f.matricula || '-'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </>
   );

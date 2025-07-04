@@ -1,12 +1,12 @@
+
 .campo-busca {
-    background-color: beige;
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    padding: 10px;
+  display: flex;
+  background-color: rgba(213, 213, 213, 0.329);
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .opcoes-busca {
   display: flex;
-  flex-direction: column;
+  min-width: 0;
 }
