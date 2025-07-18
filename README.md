@@ -20,7 +20,7 @@ Este é um projeto desenvolvido como parte de um **desafio técnico para a vaga 
 
 ```bash
 # Clone o repositório
-git clone https://github.com/GabF25/Desafio-DIXI-2025.git
+git clone -b master https://github.com/GabF25/Desafio-DIXI-2025.git
 
 # Acesse a pasta
 cd Desafio-DIXI-2025
