@@ -20,10 +20,10 @@ Este é um projeto desenvolvido como parte de um **desafio técnico para a vaga 
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/seu-usuario/nome-do-repositorio.git](https://github.com/GabF25/Desafio-DIXI-2025.git
 
 # Acesse a pasta
-cd nome-do-repositorio
+cd Desafio-DIXI-2025
 
 # Instale as dependências
 npm install
