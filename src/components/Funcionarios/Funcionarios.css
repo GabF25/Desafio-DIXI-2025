@@ -1,20 +1,18 @@
-/* Centraliza e limita largura do conteúdo principal */
 .conteudo-funcionarios {
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
   box-sizing: border-box;
   box-shadow: -2px 2px 26px 0px var(--cinza-medio);
-    -webkit-box-shadow: -2px 2px 26px 0px var(--cinza-medio);
-    -moz-box-shadow: -2px 2px 26px 0px var(--cinza-medio);
+  -webkit-box-shadow: -2px 2px 26px 0px var(--cinza-medio);
+  -moz-box-shadow: -2px 2px 26px 0px var(--cinza-medio);
   padding: 20px;
   border-radius: 13px;
 }
 
 .tela-centralizada-funcionarios {
-  width: 100%;
-  margin-left: 32%;
   margin-top: 3vh;
+  margin-left: 18em;
 }
 
 .titulo-funcionarios {
