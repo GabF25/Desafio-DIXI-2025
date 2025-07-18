@@ -1,0 +1,147 @@
+.importacao-container {
+    margin-left: 70%;
+    margin-top: 2vh;
+    background-color: var(--branco-padrao);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: -2px 2px 26px 0px var(--cinza-medio);
+    -webkit-box-shadow: -2px 2px 26px 0px var(--cinza-medio);
+    -moz-box-shadow: -2px 2px 26px 0px var(--cinza-medio);
+}
+
+.valor-quantidade {
+    color: #222;
+}
+
+/* Resumo de quantidades */
+.resumo-quantidades {
+    margin-left: 3vh;
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+
+.quantidade-apropriadas {
+    color: green;
+}
+
+.quantidade-rejeitadas {
+    color: red;
+    margin-left: 24px;
+}
+
+.titulo-importacao {
+    margin-top: 2vh;
+    margin-left: 70%;
+    width: 100%;
+}
+
+/* Estilização para tela de marcações rejeitadas */
+.marcacoes-rejeitadas {
+    margin-top: 20px;
+}
+
+.titulo-rejeitadas {
+    color: var(--azul-padrao);
+    border-bottom: 2px solid var(--cinza-padrao);
+    margin-top: -2vh;
+    margin-bottom: 10px;
+    padding: 12px 24px !important;
+}
+
+.tabela-rejeitadas {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    margin-bottom: 10px;
+}
+
+.tabela-rejeitadas th {
+    padding: 8px;
+    text-align: left;
+}
+
+.tabela-rejeitadas td {
+    padding: 12px 24px !important;
+    border-top: 2px solid var(--cinza-padrao);
+    border-bottom: 2px solid var(--cinza-padrao);
+}
+
+.tabela-rejeitadas th:nth-child(2) {
+    text-align: center;
+}
+
+
+
+.celula-motivo {
+    border-top: 2px solid var(--cinza-padrao);
+    border-bottom: 2px solid var(--cinza-padrao);
+    text-align: center;
+}
+
+.celula-dados {
+    padding: 12px 24px;
+    border-top: 2px solid var(--cinza-padrao);
+    border-bottom: 2px solid var(--cinza-padrao);
+}
+
+.coluna-marcacoes {
+    padding: 12px 24px !important;
+    color: var(--azul-padrao);
+    text-align: center;
+}
+
+.paginacao-rejeitadas {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.selecao-de-arquivo {
+    display: flex;
+    padding: 5px;
+    width: 50vh;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    border: 2px solid var(--cinza-padrao);
+}
+
+
+
+.input-file-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.input-file-label span {
+    margin-left: 8px;
+}
+
+.icone-arquivo {
+    margin-right: 8px;
+    color: var(--azul-padrao);
+    scale: 1.5;
+}
+
+.icone-arquivo:hover {
+    color: var(--azul-hover);
+}
+
+.menu-importacaoAFD {
+    padding: 20px;
+    background-color: var(--branco-padrao);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.pagina-atual {
+    color: var(--azul-padrao);
+    margin-bottom: 5px;
+}

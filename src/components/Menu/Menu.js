@@ -3,11 +3,14 @@ import { IoPersonSharp } from "react-icons/io5";
 import { MdDescription } from "react-icons/md";
 import { MdOutlineSystemUpdateAlt } from "react-icons/md";
 import{Link, useNavigate} from 'react-router-dom';
+import LogoMenu from '../../assets/logomenu.png';
 
 const Menu = () => {
 
     return ( 
         <div className="menu"> 
+
+        <img src={LogoMenu} alt="Logo Dixi" className='logo-menu' />
 
            <div className='botoes'> 
                 <ItemMenu
@@ -40,7 +43,7 @@ const ItemMenu = ({
     icone,
     rota,
 }) => {
-    const navigate = useNavigate(); // Importar Navigate 
+    const navigate = useNavigate();
 
     return (
         <div className='menu-wrapper'>

@@ -1,13 +1,21 @@
 .campo {
+    width: 100%;
     border: 1.5px solid rgba(128, 128, 128, 0.55);
-    height: 25px;
     border-radius: 5px;
-    gap: 5px;
-    margin: auto;
     height: 35px;
     padding: 5px;
     box-sizing: border-box;
     font-size: 16px;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.campo:focus {
+    outline: none;
+    border-color: var(--azul-padrao);
+}
+
+.campo:hover {
+    border-color: var(--azul-padrao);
 }
 
 .campo-erro {
@@ -33,6 +41,15 @@ h1 {
     padding-bottom: 5px;
     padding-left: 4px;
     font-weight: 500;
+}
+
+.campo-label {
+    display: block;
+    color: var(--azul-padrao);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    margin-left: 4px;
 }
 
 

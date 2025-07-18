@@ -3,9 +3,10 @@
     width: 6rem;
     min-width: 6rem;
     min-height: 100vh;
-    overflow-x:  hidden;
+    overflow-x: hidden;
     background-color: var(--azul-padrao);
     align-items: center;
+    flex-direction: column;
 }
 
 .menu-wrapper {
@@ -17,7 +18,7 @@
 }
 
 .menu-wrapper:hover {
-   background-color: var(--azul-hover);
+    background-color: var(--azul-hover);
 }
 
 .menu-wrapper:first-child {
@@ -53,7 +54,7 @@
     color: inherit;
 }
 
-.menu-item:hover{
+.menu-item:hover {
     cursor: pointer;
 }
 
@@ -64,9 +65,25 @@
 .conteudo {
     height: 100vh;
     z-index: 1000;
-    
+
 }
+
 /* 
 .botoes .menu-item:nth-child(3) > * {
    border-bottom: 1px solid white;
 } */
+
+.logo-menu {
+    width: 100%;
+    padding: 10px;
+    height: auto;
+    margin-bottom: 1rem;
+    object-fit: contain;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.logo-menu:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}

@@ -1,37 +1,60 @@
 import Campo from "../Campo/Campo";
 import "./CampoBusca.css";
+import { ValidacaoUtils } from "../../utils/Formatar";
 
 const CampoBusca = ({
-    children,
+    value,
+    onChange,
     className = "campo-busca",
 }
 ) => {
     return ( 
         <div className={className}>
            <div className="opcoes-busca">
-            <Campo placeholder="Nome" />
-            </div>
+            <Campo 
+              label={"Nome"}
+              value={value.nome}
+              onChange={e => onChange({ ...value, nome: e.target.value })}
+            />
+           </div>
 
-            <div className="opcoes-busca">
+           <div className="opcoes-busca">
             <Campo
-                tamanhoMaximo={11}
-                placeholder="000.000.000-00"
+              label={"CPF"}
+              tamanhoMaximo={14}
+              placeholder="000.000.000-00"
+              value={ValidacaoUtils.formatarCpf(value.cpf)}
+              onChange={e => onChange({ ...value, cpf: e.target.value })}
             />
-            </div>
+           </div>
 
-            <div className="opcoes-busca">
-            <Campo tamanhoMaximo={11}
-                placeholder="000.00000.00-0"
+           <div className="opcoes-busca">
+            <Campo 
+              label={"PIS"}
+              tamanhoMaximo={14}
+              placeholder="000.00000.00-0"
+              value={ValidacaoUtils.formatarPis(value.pis)}
+              onChange={e => onChange({ ...value, pis: e.target.value })}
             />
-            </div>
+           </div>
 
-            <div className="opcoes-busca">
-            <Campo tamanhoMaximo={8} placeholder="Matrícula" />
-            </div>
+           <div className="opcoes-busca">
+            <Campo 
+              label={"Matrícula"}
+              tamanhoMaximo={8}
+              value={value.matricula}
+              onChange={e => onChange({ ...value, matricula: e.target.value })}
+            />
+           </div>
 
-            <div className="opcoes-busca">
-            <Campo type="date">00/00/0000</Campo>
-            </div>
+           <div className="opcoes-busca">
+            <Campo 
+              label={"Data de Admissão"}
+              type="date"
+              value={value.data}
+              onChange={e => onChange({ ...value, data: e.target.value })}
+            />
+           </div>
         </div>
      );
 }

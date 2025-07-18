@@ -1,0 +1,116 @@
+/* Centraliza e limita largura do conteúdo principal */
+.conteudo-funcionarios {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  box-sizing: border-box;
+  box-shadow: -2px 2px 26px 0px var(--cinza-medio);
+    -webkit-box-shadow: -2px 2px 26px 0px var(--cinza-medio);
+    -moz-box-shadow: -2px 2px 26px 0px var(--cinza-medio);
+  padding: 20px;
+  border-radius: 13px;
+}
+
+.tela-centralizada-funcionarios {
+  width: 100%;
+  margin-left: 32%;
+  margin-top: 3vh;
+}
+
+.titulo-funcionarios {
+  text-align: left;
+  margin-left: 0;
+}
+
+.lista-funcionarios {
+  margin-top: 20px;
+}
+
+
+.tabela-funcionarios {
+  border-collapse: collapse;
+  width: 100%;
+  border: none;
+}
+
+.cabecalho-funcionarios {
+  font-weight: bold;
+  background-color: var(--cinza-padrao);
+  color: var(--azul-padrao);
+}
+
+.cabecalho-funcionarios th {
+  font-weight: bold;
+  border: none;
+}
+
+.cabecalho-funcionarios th:nth-child(2) {
+  text-align: left;
+}
+
+.tabela-funcionarios th,
+.tabela-funcionarios td {
+  border-left: 1px solid var(--cinza-claro);
+  border-right: 1px solid var(--cinza-claro);
+  border-bottom: 1px solid var(--cinza-claro);
+  padding: 1.5px;
+  text-align: center;
+}
+
+
+
+.tabela-funcionarios td:nth-child(2) {
+  text-align: left;
+}
+
+.editar {
+  width: 5px;
+  text-align: center;
+}
+
+.botao-editar-funcionario {
+  background-color: transparent;
+  color: var(--azul-padrao);
+  width: 5px;
+  gap: none;
+}
+
+.botao-editar-funcionario:hover {
+  color: var(--azul-hover);
+  background-color: transparent;
+}
+
+.botoes-funcionarios {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.selecao-filtro {
+  margin-left: auto;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--azul-padrao);
+  padding: 0 8px;
+  cursor: pointer;
+  color: var(--azul-padrao);
+  font-size: 14px;
+  background-color: var(--branco-padrao);
+
+}
+
+.funcionarios-navegacao {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  gap: 8px;
+  color: var(--azul-padrao);
+}
+
+
+button {
+  border: none;
+  color: var(--azul-padrao);
+  cursor: pointer;
+  font-size: 20px;
+}

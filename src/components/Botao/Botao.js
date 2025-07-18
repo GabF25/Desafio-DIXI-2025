@@ -4,10 +4,11 @@ const Botao = ({
     children,
     icone,
     aoClicar,
-    tipo = "primario"
+    tipo = "primario",
+    customClass = ""
 }) => {
     return ( 
-        <button className={`btn ${tipo}`}
+        <button className={`btn ${tipo} ${customClass}`}
             onClick={aoClicar}
         >
             {icone && <span className="btn-icon">{icone}</span>}

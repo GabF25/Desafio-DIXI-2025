@@ -1,9 +1,9 @@
 
 .campo-busca {
   display: flex;
-  background-color: rgba(213, 213, 213, 0.329);
   flex-wrap: wrap;
-  width: 100%;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .opcoes-busca {

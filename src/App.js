@@ -1,3 +1,4 @@
+
 import logo from './logo.svg';
 import './App.css';
 import Botao from './components/Botao/Botao';
@@ -9,70 +10,67 @@ import EspelhoPonto from './components/EspelhoPonto/EspelhoPonto.js';
 import ImportacaoAFD from './components/ImportacaoAFD/ImportacaoAFD.js';
 import Tela from './components/Tela/Tela.js';
 import AddFuncionarios from './components/AddFuncionarios/AddFuncionarios.js';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
-
   return (
-    <BrowserRouter>
-      <Routes>
-
-        <Route 
-          path="/" //<- home
-          element={
-            <Tela>
-              <Funcionarios/>
-            </Tela>
-          } 
-        />
-
-        <Route 
-          path="/funcionarios" 
-          element={
-            <Tela>
-              <Funcionarios/>
-            </Tela>
-          } 
-        />
-
-         <Route
-          path="/add-funcionarios" 
-          element={
-            <Tela>
-              <AddFuncionarios/>
-            </Tela>
-          }
-        />
-
-        <Route
-          path = "/espelho-ponto" 
-          element={
-            <Tela>
-              <EspelhoPonto/>
-            </Tela>
-          } 
-        />
-
-        <Route 
-          path ="/importacao-afd" 
-          element = {
-            <Tela>
-              <ImportacaoAFD/>
-            </Tela>
-          } 
-        />
-
-        <Route 
-          path ="*" 
-          element = {
-            <Tela>
-              <div>404</div>
-            </Tela>
-          } 
-        />
-
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route 
+            path="/" //<- home
+            element={
+              <Tela>
+                <Funcionarios/>
+              </Tela>
+            } 
+          />
+          <Route 
+            path="/funcionarios" 
+            element={
+              <Tela>
+                <Funcionarios/>
+              </Tela>
+            } 
+          />
+          <Route
+            path="/add-funcionarios" 
+            element={
+              <Tela>
+                <AddFuncionarios/>
+              </Tela>
+            }
+          />
+          <Route
+            path = "/espelho-ponto" 
+            element={
+              <Tela>
+                <EspelhoPonto/>
+              </Tela>
+            } 
+          />
+          <Route 
+            path ="/importacao-afd" 
+            element = {
+              <Tela>
+                <ImportacaoAFD/>
+              </Tela>
+            } 
+          />
+          <Route 
+            path ="*" 
+            element = {
+              <Tela>
+                <div>404</div>
+              </Tela>
+            } 
+          />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer />
+    </>
   );
 }
 

@@ -8,10 +8,15 @@ const Campo = ({
     value,
     placeholder,
     className,
-    children
+    children,
+    label
 }) => { 
     return ( 
         <>
+        <div className="campo-container">
+            {label && (
+                <span className="campo-label">{label}</span>
+            )}
             <label className={"label-input"}>
                 {children}
             </label>
@@ -23,6 +28,7 @@ const Campo = ({
                 value={value}
                 onChange={onChange}
             />
+        </div>
         </>
      );
 }

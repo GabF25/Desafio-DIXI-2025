@@ -2,8 +2,21 @@ import Botao from "../Botao/Botao";
 import { MdOutlineFileUpload } from "react-icons/md";
 import React, { useState } from 'react';
 import AfdUtils from '../../utils/AfdUtils';
+import './ImportacaoAFD.css';
+import { IoMdOpen } from "react-icons/io";
+import { GrFormPrevious } from "react-icons/gr";
+import { GrFormNext } from "react-icons/gr";
+
 
 const ImportacaoAFD = () => {
+    function formatarData(data) {
+        if (!data) return '';
+        const partes = data.split('-');
+        if (partes.length === 3) {
+            return `${partes[2]}/${partes[1]}/${partes[0]}`;
+        }
+        return data;
+    }
     const [fileContent, setFileContent] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
     const [parsedRows, setParsedRows] = useState([]);
@@ -13,31 +26,34 @@ const ImportacaoAFD = () => {
     const [pagina, setPagina] = useState(1);
     const porPagina = 10;
 
-    // Função para tratar mudança do input de arquivo
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
-            setSelectedFile(e.target.files[0]);
+            const file = e.target.files[0];
+            const nomeMinusculo = file.name.toLowerCase();
+            const tipo = file.type;
+            if (!nomeMinusculo.endsWith('.afd') && tipo !== 'text/plain') {
+                alert('Arquivo inválido.');
+                setSelectedFile(null);
+                return;
+            }
+            setSelectedFile(file);
             setFileContent("");
             setParsedRows([]);
             setParseErrors([]);
-            console.log("Arquivo selecionado:", e.target.files[0]);
         } else {
             setSelectedFile(null);
         }
     };
 
     const handleImport = (e) => {
-        // Busca funcionarios no localStorage
         const funcionarios = JSON.parse(localStorage.getItem("funcionario")) || [];
 
         e.preventDefault && e.preventDefault();
 
         if (!selectedFile) {
-            console.log("Nenhum arquivo selecionado");
             return;
         }
 
-        console.log("Importando arquivo:", selectedFile);
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -48,124 +64,143 @@ const ImportacaoAFD = () => {
             const parsed = [];
             const errors = [];
 
-        lines.forEach((line, idx) => {
-            let parsedObj = AfdUtils.parseLinha1510(line);
-            if (parsedObj) {
-                parsed.push({ linha: idx + 1, ...parsedObj });
-                return;
-            }
-            parsedObj = AfdUtils.parseLinha671(line);
-            if (parsedObj) {
-                parsed.push({ linha: idx + 1, ...parsedObj });
-                return;
-            }
-            errors.push({ linha: idx + 1, conteudo: line });
-        });
-
-        // Nova lógica: rejeita duplicadas e também registros sem funcionário
-        const rejeitadas = [];
-        const unicas = [];
-        parsed.forEach(marcacao => {
-            let doc = marcacao.documento;
-            let tipoDoc = marcacao.tipoDocumento;
-            if (marcacao.tipo === '671') {
-                doc = marcacao.pisOuCpf;
-                tipoDoc = (doc.length === 11 && (doc.startsWith('9') || doc.startsWith('0'))) ? 'CPF' : 'PIS';
-            }
-            if (!doc) {
-                rejeitadas.push({ marcacao, motivo: 'Registro sem PIS/CPF.' });
-                return;
-            }
-            const docNormalizado = AfdUtils.normalizaPis(doc);
-            let funcionario = null;
-            if (tipoDoc === 'CPF') {
-                funcionario = funcionarios.find(f => f.cpf && AfdUtils.normalizaPis(f.cpf) === docNormalizado);
-            } else {
-                funcionario = funcionarios.find(f => f.pis && AfdUtils.normalizaPis(f.pis) === docNormalizado);
-            }
-            if (!funcionario) {
-                rejeitadas.push({ marcacao, motivo: 'PIS ou CPF não cadastrado para colaborador.' });
-                return;
-            }
-            if (!funcionario.marcacoes) funcionario.marcacoes = [];
-            const existe = funcionario.marcacoes.some(m =>
-                m.data === marcacao.data &&
-                (m.horas || m.hora) === (marcacao.horas || marcacao.hora)
-            );
-            if (existe) {
-                rejeitadas.push({ marcacao, motivo: 'Já existe marcação nesta data e hora para o colaborador.' });
-                return;
-            }
-            funcionario.marcacoes.push({
-                data: marcacao.data,
-                hora: marcacao.horas || marcacao.hora,
-                hash: marcacao.hash || '',
-                origem: marcacao.tipo || '',
+            lines.forEach((line, idx) => {
+                let parsedObj = AfdUtils.parseLinha1510(line);
+                if (parsedObj) {
+                    parsed.push({ linha: idx + 1, ...parsedObj });
+                    return;
+                }
+                parsedObj = AfdUtils.parseLinha671(line);
+                if (parsedObj) {
+                    parsed.push({ linha: idx + 1, ...parsedObj });
+                    return;
+                }
+                errors.push({ linha: idx + 1, conteudo: line });
             });
-            unicas.push(marcacao);
-        });
-        setParsedRows(unicas);
-        setRejeitadas(rejeitadas);
-        setParseErrors(errors);
-        setPagina(1);
-        if (unicas.length > 0) {
-            localStorage.setItem("funcionario", JSON.stringify(funcionarios));
-        }
-        console.log("Marcações apropriadas:", unicas);
-        if (errors.length) console.warn("Linhas com erro:", errors);
+
+            const rejeitadas = [];
+            const unicas = [];
+            parsed.forEach(marcacao => {
+                let doc = marcacao.documento;
+                let tipoDoc = marcacao.tipoDocumento;
+                if (marcacao.tipo === '671') {
+                    doc = marcacao.pisOuCpf;
+                    tipoDoc = (doc.length === 11 && (doc.startsWith('9') || doc.startsWith('0'))) ? 'CPF' : 'PIS';
+                }
+                if (!doc) {
+                    rejeitadas.push({ marcacao, motivo: 'Registro sem PIS/CPF.' });
+                    return;
+                }
+                let docNormalizado;
+                if (tipoDoc === 'CPF' && doc.length === 12 && doc.startsWith('9')) {
+                    docNormalizado = AfdUtils.normalizaPis(doc.slice(1));
+                } else {
+                    docNormalizado = AfdUtils.normalizaPis(doc);
+                }
+                let funcionario = null;
+                if (tipoDoc === 'CPF') {
+                    funcionario = funcionarios.find(f => f.cpf && AfdUtils.normalizaPis(f.cpf) === docNormalizado);
+                } else {
+                    funcionario = funcionarios.find(f => f.pis && AfdUtils.normalizaPis(f.pis) === docNormalizado);
+                }
+                if (!funcionario) {
+                    rejeitadas.push({ marcacao, motivo: 'PIS ou CPF não cadastrado para colaborador.' });
+                    return;
+                }
+                if (!funcionario.marcacoes) funcionario.marcacoes = [];
+                const existe = funcionario.marcacoes.some(m =>
+                    m.data === marcacao.data &&
+                    (m.horas || m.hora) === (marcacao.horas || marcacao.hora)
+                );
+                if (existe) {
+                    rejeitadas.push({ marcacao, motivo: 'Já existe marcação nesta data e hora para o colaborador.' });
+                    return;
+                }
+                funcionario.marcacoes.push({
+                    data: marcacao.data,
+                    hora: marcacao.horas || marcacao.hora,
+                    hash: marcacao.hash || '',
+                    origem: marcacao.tipo || '',
+                });
+                unicas.push(marcacao);
+            });
+            setParsedRows(unicas);
+            setRejeitadas(rejeitadas);
+            setParseErrors(errors);
+            setPagina(1);
+            if (unicas.length > 0) {
+                localStorage.setItem("funcionario", JSON.stringify(funcionarios));
+            }
         };
 
-        reader.onerror = (err) => {
-            console.error("Erro ao ler arquivo:", err);
-        };
+        
 
         reader.readAsText(selectedFile);
     };
 
     return (
         <div>
-            <h1>Importação AFD</h1>
-            <div>
-                <input
-                    type="file"
-                    onChange={handleFileChange}
-                    key={selectedFile ? selectedFile.name : ''}
-                />
-                <Botao
-                    icone={<MdOutlineFileUpload />}
-                    aoClicar={handleImport}
-                    disabled={!selectedFile}
-                >
-                    Importar
-                </Botao>
-            </div>
+            <h1 className="titulo-importacao">Importação AFD</h1>
+            <div className="importacao-container">
 
-            {/* Resumo de quantidades */}
-            {(parsedRows.length > 0 || rejeitadas.length > 0) && (
-                <div style={{ marginTop: 24, marginBottom: 16, fontWeight: 'bold' }}>
-                    <span style={{ color: 'green' }}>Apropriadas: {parsedRows.length}</span>
-                    <span style={{ marginLeft: 24, color: 'red' }}>Rejeitadas: {rejeitadas.length}</span>
+                <div className="menu-importacaoAFD">
+                    <label className="selecao-de-arquivo">
+                        <span>Clique para selecionar um arquivo</span>
+
+                        <IoMdOpen className="icone-arquivo" />
+                        <input
+                            type="file"
+                            onChange={handleFileChange}
+                            style={{ display: 'none' }}
+                        />
+                    </label>
+                    <Botao
+                        icone={<MdOutlineFileUpload />}
+                        aoClicar={handleImport}
+                        disabled={!selectedFile}
+                    >
+                        Importar
+                    </Botao>
                 </div>
-            )}
 
-            {/* Exibe marcações rejeitadas e motivos com paginação */}
-            {rejeitadas.length > 0 && (
-                <div style={{ marginTop: 20, color: 'red' }}>
-                    <h3>Marcações rejeitadas:</h3>
-                    <ul>
-                        {rejeitadas.slice((pagina-1)*porPagina, pagina*porPagina).map((rej, i) => (
-                            <li key={i}>
-                                {rej.motivo} [{rej.marcacao.documento || rej.marcacao.pisOuCpf} - {rej.marcacao.data} {rej.marcacao.horas || rej.marcacao.hora}]
-                            </li>
-                        ))}
-                    </ul>
-                    <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 8 }}>
-                        <button onClick={() => setPagina(p => Math.max(1, p-1))} disabled={pagina === 1}>Anterior</button>
-                        <span>Página {pagina} de {Math.ceil(rejeitadas.length/porPagina)}</span>
-                        <button onClick={() => setPagina(p => Math.min(Math.ceil(rejeitadas.length/porPagina), p+1))} disabled={pagina === Math.ceil(rejeitadas.length/porPagina)}>Próxima</button>
+                {(parsedRows.length > 0 || rejeitadas.length > 0) && (
+                    <div className="resumo-quantidades">
+                        <span className="quantidade-apropriadas">Nº Apropriados: <span className="valor-quantidade">{parsedRows.length}</span></span>
+                        <span className="quantidade-rejeitadas">Nº Não Apropriados: <span className="valor-quantidade">{rejeitadas.length}</span></span>
                     </div>
-                </div>
-            )}
+                )}
+
+                {rejeitadas.length > 0 && (
+                    <div className="marcacoes-rejeitadas">
+                        <h3 className="titulo-rejeitadas">Marcações não Importadas</h3>
+                        <table className="tabela-rejeitadas">
+                            <thead>
+                                <tr>
+                                    <th className="coluna-marcacoes">Dados da marcação</th>
+                                    <th className="coluna-marcacoes">Motivo do erro</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {rejeitadas.slice((pagina - 1) * porPagina, pagina * porPagina).map((rej, i) => (
+                                    <tr key={i}>
+                                        <td className="celula-dados">
+                                            {formatarData(rej.marcacao.data)} {rej.marcacao.horas || rej.marcacao.hora}
+                                        </td>
+                                        <td className="celula-motivo">
+                                            {rej.motivo}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <div className="paginacao-rejeitadas">
+                            <button onClick={() => setPagina(p => Math.max(1, p - 1))} disabled={pagina === 1}><GrFormPrevious /></button>
+                            <span className="pagina-atual">{pagina}</span>
+                            <button onClick={() => setPagina(p => Math.min(Math.ceil(rejeitadas.length / porPagina), p + 1))} disabled={pagina === Math.ceil(rejeitadas.length / porPagina)}><GrFormNext /></button>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
