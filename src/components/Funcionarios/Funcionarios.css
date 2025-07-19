@@ -54,9 +54,10 @@
   border-left: 1px solid var(--cinza-claro);
   border-right: 1px solid var(--cinza-claro);
   border-bottom: 1px solid var(--cinza-claro);
-  padding: 0.5rem;
   text-align: center;
   word-wrap: break-word;
+  padding: 0.25rem 0.5rem;
+
 }
 
 .tabela-funcionarios td:nth-child(2) {
