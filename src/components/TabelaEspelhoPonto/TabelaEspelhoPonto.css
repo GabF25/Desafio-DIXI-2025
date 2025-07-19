@@ -19,6 +19,7 @@
   margin-bottom: 16px;
 }
 
+
 .tabela-espelho {
 border-radius: 16px;
 border-collapse: collapse;
@@ -34,7 +35,7 @@ width: 100%;
 
 .tabela-espelho th {
   position: sticky;
-  top: 0;
+  top: -3px;
   background: var(--cinza-medio);
   z-index: 2;
   box-shadow: 0 2px 4px rgba(0,0,0,0.04);

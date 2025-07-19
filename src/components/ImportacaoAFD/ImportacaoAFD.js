@@ -139,67 +139,69 @@ const ImportacaoAFD = () => {
     };
 
     return (
-        <div>
-            <h1 className="titulo-importacao">Importação AFD</h1>
-            <div className="importacao-container">
+        <div className="tela-centralizada">
+            <div className="importacao-afd">
+                <h1 className="titulo-importacao">Importação AFD</h1>
+                <div className="importacao-container">
 
-                <div className="menu-importacaoAFD">
-                    <label className="selecao-de-arquivo">
-                        <span>Clique para selecionar um arquivo</span>
+                    <div className="menu-importacaoAFD">
+                        <label className="selecao-de-arquivo">
+                            <span>Clique para selecionar um arquivo</span>
 
-                        <IoMdOpen className="icone-arquivo" />
-                        <input
-                            type="file"
-                            onChange={handleFileChange}
-                            style={{ display: 'none' }}
-                        />
-                    </label>
-                    <Botao
-                        icone={<MdOutlineFileUpload />}
-                        aoClicar={handleImport}
-                        disabled={!selectedFile}
-                    >
-                        Importar
-                    </Botao>
-                </div>
-
-                {(parsedRows.length > 0 || rejeitadas.length > 0) && (
-                    <div className="resumo-quantidades">
-                        <span className="quantidade-apropriadas">Nº Apropriados: <span className="valor-quantidade">{parsedRows.length}</span></span>
-                        <span className="quantidade-rejeitadas">Nº Não Apropriados: <span className="valor-quantidade">{rejeitadas.length}</span></span>
+                            <IoMdOpen className="icone-arquivo" />
+                            <input
+                                type="file"
+                                onChange={handleFileChange}
+                                style={{ display: 'none' }}
+                            />
+                        </label>
+                        <Botao
+                            icone={<MdOutlineFileUpload />}
+                            aoClicar={handleImport}
+                            disabled={!selectedFile}
+                        >
+                            Importar
+                        </Botao>
                     </div>
-                )}
 
-                {rejeitadas.length > 0 && (
-                    <div className="marcacoes-rejeitadas">
-                        <h3 className="titulo-rejeitadas">Marcações não Importadas</h3>
-                        <table className="tabela-rejeitadas">
-                            <thead>
-                                <tr>
-                                    <th className="coluna-marcacoes">Dados da marcação</th>
-                                    <th className="coluna-marcacoes">Motivo do erro</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {rejeitadas.slice((pagina - 1) * porPagina, pagina * porPagina).map((rej, i) => (
-                                    <tr key={i}>
-                                        <td className="celula-dados">
-                                            {formatarData(rej.marcacao.data)} {rej.marcacao.horas || rej.marcacao.hora}
-                                        </td>
-                                        <td className="celula-motivo">
-                                            {rej.motivo}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                        <div className="paginacao-rejeitadas">
-                            <button onClick={() => setPagina(p => Math.max(1, p - 1))} disabled={pagina === 1}><GrFormPrevious /></button>
-                            <span className="pagina-atual">{pagina}</span>
-                            <button onClick={() => setPagina(p => Math.min(Math.ceil(rejeitadas.length / porPagina), p + 1))} disabled={pagina === Math.ceil(rejeitadas.length / porPagina)}><GrFormNext /></button>
+                    {(parsedRows.length > 0 || rejeitadas.length > 0) && (
+                        <div className="resumo-quantidades">
+                            <span className="quantidade-apropriadas">Nº Apropriados: <span className="valor-quantidade">{parsedRows.length}</span></span>
+                            <span className="quantidade-rejeitadas">Nº Não Apropriados: <span className="valor-quantidade">{rejeitadas.length}</span></span>
                         </div>
-                    </div>
-                )}
+                    )}
+
+                    {rejeitadas.length > 0 && (
+                        <div className="marcacoes-rejeitadas">
+                            <h3 className="titulo-rejeitadas">Marcações não Importadas</h3>
+                            <table className="tabela-rejeitadas">
+                                <thead>
+                                    <tr>
+                                        <th className="coluna-marcacoes">Dados da marcação</th>
+                                        <th className="coluna-marcacoes">Motivo do erro</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rejeitadas.slice((pagina - 1) * porPagina, pagina * porPagina).map((rej, i) => (
+                                        <tr key={i}>
+                                            <td className="celula-dados">
+                                                {formatarData(rej.marcacao.data)} {rej.marcacao.horas || rej.marcacao.hora}
+                                            </td>
+                                            <td className="celula-motivo">
+                                                {rej.motivo}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className="paginacao-rejeitadas">
+                                <button onClick={() => setPagina(p => Math.max(1, p - 1))} disabled={pagina === 1}><GrFormPrevious /></button>
+                                <span className="pagina-atual">{pagina}</span>
+                                <button onClick={() => setPagina(p => Math.min(Math.ceil(rejeitadas.length / porPagina), p + 1))} disabled={pagina === Math.ceil(rejeitadas.length / porPagina)}><GrFormNext /></button>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

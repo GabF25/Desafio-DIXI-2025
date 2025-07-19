@@ -1,8 +1,22 @@
+
+.tela-centralizada {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  background: var(--branco-padrao);
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.importacao-afd{
+    width: 40rem;
+}
+
 .importacao-container {
-    margin-left: 70%;
+    width: 40rem;
     margin-top: 2vh;
     background-color: var(--branco-padrao);
-    width: 100%;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -31,9 +45,8 @@
 }
 
 .titulo-importacao {
+    text-align: left;
     margin-top: 2vh;
-    margin-left: 70%;
-    width: 100%;
 }
 
 .marcacoes-rejeitadas {
@@ -49,7 +62,6 @@
 }
 
 .tabela-rejeitadas {
-    width: 100%;
     border-collapse: collapse;
     background: #fff;
     margin-bottom: 10px;
@@ -100,7 +112,6 @@
 .selecao-de-arquivo {
     display: flex;
     padding: 5px;
-    width: 50vh;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     align-items: center;
@@ -134,7 +145,6 @@
 .menu-importacaoAFD {
     padding: 20px;
     background-color: var(--branco-padrao);
-    width: 100%;
     display: flex;
     flex-direction: row;
 }
