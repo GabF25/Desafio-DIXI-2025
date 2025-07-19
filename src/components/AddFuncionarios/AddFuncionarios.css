@@ -41,7 +41,7 @@ html, body {
 
 .campoGrupo {
   display: flex;
-  flex-direction: column; /* empilha h3 em cima do Campo */
+  flex-direction: column;
   padding: 5px;
 }
 

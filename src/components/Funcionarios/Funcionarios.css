@@ -1,23 +1,19 @@
-/* Container principal - mantendo layout original */
 .tela-centralizada-funcionarios {
   margin-top: 2rem;
-  padding: 0 1rem;
-  width: 100%;
   max-width: 1200px;
+  padding: 0 2rem;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .conteudo-funcionarios {
-  margin: 1.5rem auto 0;
-  box-sizing: border-box;
   box-shadow: -2px 2px 26px 0px var(--cinza-medio);
   -webkit-box-shadow: -2px 2px 26px 0px var(--cinza-medio);
   -moz-box-shadow: -2px 2px 26px 0px var(--cinza-medio);
   padding: 1.25rem;
   border-radius: 13px;
-  width: 100%;
 }
 
 .titulo-funcionarios {
@@ -30,12 +26,10 @@
   margin-top: 1.25rem;
 }
 
-/* Mantendo estilos originais da tabela */
 .tabela-funcionarios {
   border-collapse: collapse;
   width: 100%;
   border: none;
-  min-width: 600px;
 }
 
 .cabecalho-funcionarios {
@@ -91,7 +85,6 @@
   background-color: transparent;
 }
 
-/* Mantendo layout original dos botões */
 .botoes-funcionarios {
   display: flex;
   gap: 0.625rem;
@@ -111,7 +104,6 @@
   min-width: 120px;
 }
 
-/* Navegação original */
 .funcionarios-navegacao {
   display: flex;
   justify-content: center;
@@ -154,55 +146,3 @@ button {
   font-size: 1.25rem;
 }
 
-/* RESPONSIVIDADE - SÓ PARA MOBILE/TABLET */
-
-/* Mobile - até 768px */
-@media (max-width: 768px) {
-  .tela-centralizada-funcionarios {
-    margin-top: 1rem;
-    padding: 0 0.5rem;
-  }
-  
-  .conteudo-funcionarios {
-    padding: 1rem;
-    margin-top: 1rem;
-  }
-  
-  /* Scroll horizontal para tabela em mobile */
-  .lista-funcionarios {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .tabela-funcionarios {
-    min-width: 500px;
-    font-size: 0.875rem;
-  }
-  
-  /* Botões em mobile - só quebra linha se necessário */
-  .botoes-funcionarios {
-    flex-wrap: wrap;
-  }
-}
-
-/* Desktop com menu lateral - 769px+ */
-@media (min-width: 769px) {
-  .tela-centralizada-funcionarios {
-    margin-left: 250px; /* Espaço para menu lateral */
-    width: calc(100% - 250px);
-    max-width: none;
-  }
-}
-
-/* Desktop grande - 1200px+ */
-@media (min-width: 1200px) {
-  .tela-centralizada-funcionarios {
-    padding: 0 2rem;
-  }
-  
-  .conteudo-funcionarios {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
